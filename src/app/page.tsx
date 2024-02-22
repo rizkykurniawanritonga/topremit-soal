@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <h1>Soal Live Test:</h1>
+      <h1>Soal Live Test Topremit:</h1>
       <Link href="/soal1">Soal 1</Link>
       <br />
       <Link href="/soal2">Soal 2</Link>
