@@ -1,5 +1,5 @@
 "use client";
-import { AES, enc } from "crypto-js";
+import { lowerCase } from "lodash";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -14,13 +14,7 @@ export default function Home() {
   useEffect(() => {
     setoutput2(input2 ? ot13(input2) : "");
   }, [input2]);
-  const encryptId = (str: string) => {
-    const ciphertext = AES.encrypt(str, keyEnc);
-    return ciphertext.toString();
-  };
-  const decryptId = (str: string) => {
-    return AES.decrypt(str, keyEnc).toString(enc.Utf8);
-  };
+  const isUpperCase = (string: string) => /^[A-Z]*$/.test(string);
   function ot13(str: string, key?: string) {
     var alphabets = [
       "A",
@@ -102,8 +96,14 @@ export default function Home() {
     var resultStr = [];
     for (let i = 0; i < str.length; i++) {
       for (let j = 0; j < alphabets.length; j++) {
-        if (str[i] === alphabets[j]) {
-          resultStr.push(alphabets13[j]);
+        if (isUpperCase(str[i])) {
+          if (str[i] === alphabets[j]) {
+            resultStr.push(alphabets13[j]);
+          }
+        } else {
+          if (lowerCase(str[i]) === lowerCase(alphabets[j])) {
+            resultStr.push(lowerCase(alphabets13[j]));
+          }
         }
       }
     }
